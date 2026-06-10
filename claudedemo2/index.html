@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warren Zhao — 个人主页</title>
+  <meta name="description" content="Warren Zhao 的个人主页 — 软件架构师，专注 AI 领域。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #07080c;
+      --surface: rgba(255, 255, 255, 0.04);
+      --text: #f4f6fb;
+      --muted: #b9c0d0;
+      --accent: #8aa2ff;
+      --accent-soft: rgba(138, 162, 255, 0.16);
+      --border: rgba(255, 255, 255, 0.12);
+      --maxw: 720px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; background: var(--bg); }
+
+    body {
+      margin: 0;
+      font-family: "Lora", "Noto Serif SC", "Songti SC", "STSong",
+        Georgia, "Times New Roman", serif;
+      color: var(--text);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background: transparent;
+    }
+
+    /* 渐变背景动画 —— 流动的色彩 */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(
+        125deg,
+        #07080c,
+        #1a1145,
+        #2a1a6b,
+        #0e3a5c,
+        #14224a,
+        #07080c
+      );
+      background-size: 400% 400%;
+      animation: gradientShift 18s ease infinite;
+    }
+
+    /* 叠加一层缓慢漂移的彩色光晕，增强流动感 */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -20%;
+      z-index: -1;
+      background:
+        radial-gradient(35% 35% at 20% 25%, rgba(138, 162, 255, 0.45), transparent 70%),
+        radial-gradient(40% 40% at 80% 30%, rgba(176, 140, 255, 0.40), transparent 70%),
+        radial-gradient(45% 45% at 60% 85%, rgba(94, 234, 212, 0.30), transparent 70%);
+      filter: blur(30px);
+      animation: drift 24s ease-in-out infinite alternate;
+    }
+
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes drift {
+      0%   { transform: translate3d(-4%, -3%, 0) scale(1); }
+      100% { transform: translate3d(5%, 4%, 0) scale(1.2); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::before,
+      body::after { animation: none; }
+    }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+    }
+
+    /* 顶部介绍 */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 96px 0 48px;
+    }
+
+    .avatar {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #b08cff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 28px;
+      box-shadow: 0 8px 28px var(--accent-soft);
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      margin: 0 0 12px;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      line-height: 1.15;
+      margin: 0 0 16px;
+      letter-spacing: -0.01em;
+      font-weight: 700;
+    }
+
+    .tagline {
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0;
+    }
+
+    /* 让主内容撑开，把底部推到下方 */
+    main { flex: 1; }
+
+    section { padding: 40px 0; }
+
+    h2 {
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      font-weight: 600;
+      margin: 0 0 18px;
+    }
+
+    .about p {
+      font-size: 1.08rem;
+      margin: 0 0 16px;
+    }
+    .about p:last-child { margin-bottom: 0; }
+
+    /* 底部 + 社交链接 */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0 56px;
+      margin-top: 24px;
+    }
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+    }
+
+    .social-link:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      transform: translateY(-2px);
+    }
+
+    .social-link .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .copyright {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 480px) {
+      .hero { min-height: 60vh; padding-top: 72px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <!-- 顶部介绍 -->
+    <header class="hero">
+      <div class="avatar">W</div>
+      <p class="eyebrow">你好，我是</p>
+      <h1>Warren Zhao</h1>
+      <p class="tagline">
+        软件架构师，现专注于 AI 领域 —— 把复杂系统设计得简单，让想法真正落地。
+      </p>
+    </header>
+
+    <!-- 关于我 -->
+    <section class="about" id="about">
+      <h2>关于我</h2>
+      <p>
+        我是 Warren Zhao，一名软件架构师。多年来专注于系统架构与工程实践，
+        擅长在复杂的业务与技术约束之间找到清晰、可演进的设计。
+      </p>
+      <p>
+        目前我把主要精力投入在 AI 领域，探索如何把大模型与智能体能力
+        真正落地到产品与工程系统中。我相信好的架构既要有前瞻性，
+        也要能脚踏实地地解决眼前的问题。
+      </p>
+    </section>
+  </main>
+
+  <!-- 底部社交链接 -->
+  <footer>
+    <div class="wrap">
+      <h2>找到我</h2>
+      <div class="socials">
+        <a class="social-link" href="#" target="_blank" rel="noopener">
+          <span class="dot"></span> GitHub
+        </a>
+        <a class="social-link" href="https://www.linkedin.com/in/warren-zhao-b7551b45/" target="_blank" rel="noopener">
+          <span class="dot"></span> LinkedIn
+        </a>
+        <a class="social-link" href="#" target="_blank" rel="noopener">
+          <span class="dot"></span> 知乎
+        </a>
+        <a class="social-link" href="mailto:zhao_wh@hotmail.com">
+          <span class="dot"></span> 邮箱
+        </a>
+      </div>
+      <p class="copyright">© <span id="year"></span> Warren Zhao · 保留所有权利</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
